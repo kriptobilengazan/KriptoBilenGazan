@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="tk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kripto Bilen Gazan | Kripto bilen akylly gazan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-turquoise: #06b6d4;
+            --primary-gold: #d97706;
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-turquoise));
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-turquoise), var(--primary-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glow-on-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .glow-on-hover:hover {
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+            }
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease-in;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+        }
+        
+        .slide-up {
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+        
+        .slide-up.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .team-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .team-card img {
+            transition: transform 0.3s ease;
+        }
+        
+        .tip-card {
+            transition: all 0.3s ease;
+        }
+        
+        .tip-card:hover {
+            transform: translateY(-5px) rotate(2deg);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .language-switcher {
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher:hover {
+            transform: scale(1.1);
+        }
+        
+        .flag-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <!-- Language Switcher -->
+    <div class="fixed top-4 right-4 z-50 flex space-x-2">
+        <button onclick="changeLanguage('tk')" class="language-switcher bg-white rounded-full p-2 shadow-md hover:bg-blue-50">
+            <img src="https://flagcdn.com/w20/tm.png" class="flag-icon" alt="Turkmen">
+        </button>
+        <button onclick="changeLanguage('en')" class="language-switcher bg-white rounded-full p-2 shadow-md hover:bg-blue-50">
+            <img src="https://flagcdn.com/w20/gb.png" class="flag-icon" alt="English">
+        </button>
+        <button onclick="changeLanguage('ru')" class="language-switcher bg-white rounded-full p-2 shadow-md hover:bg-blue-50">
+            <img src="https://flagcdn.com/w20/ru.png" class="flag-icon" alt="Russian">
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="" class="flex items-center">
+                        <div class="gradient-bg rounded-lg p-2 mr-2">
+                            <i class="fas fa-coins text-white text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold gradient-text">Kripto Bilen Gazan</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-slate-700 hover:text-blue-600 transition">Biz barada</a>
+                    <a href="#why-us" class="text-slate-700 hover:text-blue-600 transition">Näme üçin biz?</a>
+                    <a href="#team" class="text-slate-700 hover:text-blue-600 transition">Toparymyz</a>
+                    <a href="#tips" class="text-slate-700 hover:text-blue-600 transition">Maslahatlar</a>
+                    <a href="#contact" class="text-slate-700 hover:text-blue-600 transition">Habarlaşmak</a>
+                </div>
+                <div class="flex items-center md:hidden">
+                    <button id="mobile-menu-button" class="text-slate-700 hover:text-blue-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50">Biz barada</a>
+                <a href="#why-us" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50">Näme üçin biz?</a>
+                <a href="#team" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50">Toparymyz</a>
+                <a href="#tips" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50">Maslahatlar</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-blue-50">Habarlaşmak</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="video-container relative h-screen">
+        <!-- Background Video -->
+        <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-digital-background-1147-large.mp4" type="video/mp4">
+        </video>
+
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 flex flex-col justify-center items-center h-full px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 slide-up">
+                <span class="gradient-text">Kripto bilen akylly gazan.</span><br>
+                <span class="gradient-text">Bilimli bol, üstünlik gazan!</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-white mb-8 max-w-3xl slide-up" style="animation-delay: 0.2s;">
+                Kripto dünýäsine ilkinji ädimiňizi ädiň. Biz size ýol görkezeris!
+            </p>
+
+            <!-- Embedded YouTube Video -->
+            <div class="w-full max-w-2xl mx-auto mt-2 slide-up" style="animation-delay: 0.4s;">
+                <div class="relative pb-[56.25%] h-0 overflow-hidden rounded-xl shadow-lg">
+                    <iframe class="absolute top-0 left-0 w-full h-full rounded-xl"
+                            src="https://www.youtube.com/embed/XO31Ygo2jmM?rel=0&autoplay=1&mute=1&loop=1&playlist=XO31Ygo2jmM"
+                            title="Kripto bilen Gazan introduction"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20 bg-gradient-to-b from-white to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4 slide-up">Biz barada</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6 slide-up" style="animation-delay: 0.2s;"></div>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto slide-up" style="animation-delay: 0.4s;">
+                    Biz ýaşlara maliýe azatlygy üçin kripto bilen düşünjeli ýol görkezýäris.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-2xl shadow-lg hover:shadow-xl transition fade-in">
+                    <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-lightbulb text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4">Bilim</h3>
+                    <p class="text-slate-600 text-center">
+                        Kripto dünýäsine düşünmek üçin zerur bilimleri size ýetirýäris. 
+                        Ýönekeý we düşnükli dersler bilen kripto walýutalaryny öwreniň.
+                    </p>
+                </div>
+                
+                <div class="glass-card p-8 rounded-2xl shadow-lg hover:shadow-xl transition fade-in" style="animation-delay: 0.2s;">
+                    <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4">Howpsuzlyk</h3>
+                    <p class="text-slate-600 text-center">
+                        Kripto walýutalaryny howpsyz saklamagy we ulanyp bilmek üçin ähli 
+                        howpsuzlyk çärelerini size görkezýäris.
+                    </p>
+                </div>
+                
+                <div class="glass-card p-8 rounded-2xl shadow-lg hover:shadow-xl transition fade-in" style="animation-delay: 0.4s;">
+                    <div class="gradient-bg w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-rocket text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-4">Ösüş</h3>
+                    <p class="text-slate-600 text-center">
+                        Kripto walýutalary bilen işlemek üçin zerur strategiýalary we 
+                        üstünlikli ýollary size görkezýäris.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Trust Us Section -->
+    <section id="why-us" class="py-20 bg-gradient-to-b from-blue-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4 slide-up">Näme üçin biz?</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6 slide-up" style="animation-delay: 0.2s;"></div>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto slide-up" style="animation-delay: 0.4s;">
+                    Biz bilim bermek bilen çäklenmän, siziň üstünligiňiz üçin hakyky goldaw berýäris.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition fade-in floating">
+                    <div class="gradient-bg w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-lock text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center mb-3">Risk-Free Learning</h3>
+                    <p class="text-slate-600 text-sm text-center">
+                        Kripto walýutalaryny öwrenmek üçin howpsuz we risk siz muhit döredýäris.
+                    </p>
+                </div>
+                
+                <div class="glass-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition fade-in floating" style="animation-delay: 0.2s;">
+                    <div class="gradient-bg w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-chart-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center mb-3">Real Case Studies</h3>
+                    <p class="text-slate-600 text-sm text-center">
+                        Hakyky ýagdaýlardan alnan mysallar bilen kripto walýutalaryny öwreniň.
+                    </p>
+                </div>
+                
+                <div class="glass-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition fade-in floating" style="animation-delay: 0.4s;">
+                    <div class="gradient-bg w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-hand-holding-heart text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center mb-3">No Scams, No Hype</h3>
+                    <p class="text-slate-600 text-sm text-center">
+                        Biz hakykatdan gürrüň berýäris, şertnama ýa-da aldamajyk ýok.
+                    </p>
+                </div>
+                
+                <div class="glass-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition fade-in floating" style="animation-delay: 0.6s;">
+                    <div class="gradient-bg w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-users text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center mb-3">Telegram Community</h3>
+                    <p class="text-slate-600 text-sm text-center">
+                        Toparymyzyň aktiw jemgyýetine goşulyň. Soraglaryňyza jogap bereris!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team Section -->
+    <section id="team" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4 slide-up">Toparymyz</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6 slide-up" style="animation-delay: 0.2s;"></div>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto slide-up" style="animation-delay: 0.4s;">
+                    Kripto dünýäsinde tejribeli we peýdaly bilimleri paýlaşmak isleýän hünärmenler.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="team-card glass-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition fade-in">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Team Member" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-2">Myrat Geldiýew</h3>
+                    <p class="text-blue-600 text-center mb-4">Dürli we Founder</p>
+                    <p class="text-slate-600 text-sm text-center">
+                        5 ýyllyk kripto tejribesi. Kripto walýutalarynyň tehnologiýasy we strategiýalary boýunça hünärmen.
+                    </p>
+                    <div class="flex justify-center mt-4 space-x-3">
+                        <a href="#" class="text-blue-500 hover:text-blue-700"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-blue-500 hover:text-blue-700"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-card glass-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition fade-in" style="animation-delay: 0.2s;">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Team Member" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-2">Jennet Ataýewa</h3>
+                    <p class="text-blue-600 text-center mb-4">Kripto Analist</p>
+                    <p class="text-slate-600 text-sm text-center">
+                        Kripto bazarynyň analizi we strategiýalary boýunça hünärmen. 3 ýyllyk tejribe.
+                    </p>
+                    <div class="flex justify-center mt-4 space-x-3">
+                        <a href="#" class="text-blue-500 hover:text-blue-700"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-blue-500 hover:text-blue-700"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-card glass-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition fade-in" style="animation-delay: 0.4s;">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Team Member" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-2">Begenç Orazow</h3>
+                    <p class="text-blue-600 text-center mb-4">Tehnologiýa Hünärmeni</p>
+                    <p class="text-slate-600 text-sm text-center">
+                        Blokchain tehnologiýalary we howpsuzlyk çäreleri boýunça hünärmen. 4 ýyllyk tejribe.
+                    </p>
+                    <div class="flex justify-center mt-4 space-x-3">
+                        <a href="#" class="text-blue-500 hover:text-blue-700"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-blue-500 hover:text-blue-700"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-card glass-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition fade-in" style="animation-delay: 0.6s;">
+                    <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Team Member" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-center mb-2">Güljemal Hojageldiýewa</h3>
+                    <p class="text-blue-600 text-center mb-4">Maliýe Maslahatçysy</p>
+                    <p class="text-slate-600 text-sm text-center">
+                        Maliýe meýilnamalaryny düzüp, kripto walýutalarynyň ulanylyşyny öwredýär.
+                    </p>
+                    <div class="flex justify-center mt-4 space-x-3">
+                        <a href="#" class="text-blue-500 hover:text-blue-700"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-blue-500 hover:text-blue-700"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Follow Us Section -->
+    <section class="py-16 bg-gradient-to-b from-white to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4 slide-up">Biziň bilen baglanyşyň</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6 slide-up" style="animation-delay: 0.2s;"></div>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto slide-up" style="animation-delay: 0.4s;">
+                    Toparymyzyň aktiw jemgyýetine goşulyň. Soraglaryňyza jogap bereris!
+                </p>
+            </div>
+            
+            <div class="flex justify-center space-x-6 md:space-x-12">
+                <a href="#" class="bg-white p-4 rounded-full shadow-lg hover:shadow-xl transition hover:bg-blue-50 glow-on-hover">
+                    <i class="fab fa-telegram text-blue-500 text-3xl"></i>
+                </a>
+                <a href="#" class="bg-white p-4 rounded-full shadow-lg hover:shadow-xl transition hover:bg-pink-50 glow-on-hover">
+                    <i class="fab fa-instagram text-pink-500 text-3xl"></i>
+                </a>
+                <a href="#" class="bg-white p-4 rounded-full shadow-lg hover:shadow-xl transition hover:bg-red-50 glow-on-hover">
+                    <i class="fab fa-youtube text-red-500 text-3xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips for Beginners Section -->
+    <section id="tips" class="py-20 bg-gradient-to-b from-blue-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4 slide-up">Başlangyç üçin maslahatlar</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6 slide-up" style="animation-delay: 0.2s;"></div>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto slide-up" style="animation-delay: 0.4s;">
+                    Kripto walýutalary bilen işe başlamak üçin zerur maslahatlar.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="tip-card glass-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition fade-in">
+                    <div class="gradient-bg w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-coins text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center mb-3">Kiçi başlaň</h3>
+                    <p class="text-slate-600 text-sm text-center">
+                        Kripto walýutalary bilen işe kiçi mukdarlarda başlaň. 
+                        Öň bilimleriňizi artdyryň, soňra köp pul goýuň.
+                    </p>
+                </div>
+                
+                <div class="tip-card glass-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition fade-in" style="animation-delay: 0.2s;">
+                    <div class="gradient-bg w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-user-shield text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center mb-3">P2P-y eýerçilik bilen ulanyň</h3>
+                    <p class="text-slate-600 text-sm text-center">
+                        P2P platformalarynda işlemek üçin howpsuzlyk çärelerini berjaý ediň. 
+                        Ynanýan adamlar bilen işleşiň.
+                    </p>
+                </div>
+                
+                <div class="tip-card glass-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition fade-in" style="animation-delay: 0.4s;">
+                    <div class="gradient-bg w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-brain text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-center mb-3">Öz bilimiňize esaslanyň</h3>
+                    <p class="text-slate-600 text-sm text-center">
+                        Tötänleýin "signallara" ynanmaň. Öz araştyrmalaryňyzy edip, 
+                        öz çözgütleriňizi dörediň.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card rounded-2xl shadow-lg p-8 md:p-12 max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4 slide-up">Habarlaşmak</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6 slide-up" style="animation-delay: 0.2s;"></div>
+                    <p class="text-lg text-slate-600 max-w-3xl mx-auto slide-up" style="animation-delay: 0.4s;">
+                        Soraglaryňyz ýa-da teklipleriňiz bar bolsa, aşakdaky üsti bilen biz bilen habarlaşyň.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 p-6 rounded-xl text-center hover:bg-blue-100 transition fade-in">
+                        <div class="gradient-bg w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <i class="fas fa-envelope text-white"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Email</h3>
+                        <a href="mailto:info@kriptobilengazan.com" class="text-blue-600 hover:text-blue-800">info@kriptobilengazan.com</a>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-6 rounded-xl text-center hover:bg-blue-100 transition fade-in" style="animation-delay: 0.2s;">
+                        <div class="gradient-bg w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <i class="fab fa-telegram text-white"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Telegram</h3>
+                        <a href="#" class="text-blue-600 hover:text-blue-800">@kriptobilengazan</a>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-6 rounded-xl text-center hover:bg-blue-100 transition fade-in" style="animation-delay: 0.4s;">
+                        <div class="gradient-bg w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <i class="fas fa-globe text-white"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Sosial Media</h3>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="text-blue-600 hover:text-blue-800"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-blue-600 hover:text-blue-800"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="gradient-bg rounded-lg p-2 mr-2">
+                            <i class="fas fa-coins text-white text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold gradient-text">Kripto Bilen Gazan</span>
+                    </div>
+                    <p class="text-slate-400 text-sm">
+                        Kripto bilen akylly gazan. Bilimli bol, üstünlik gazan!
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Sahypalar</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-slate-400 hover:text-white transition">Biz barada</a></li>
+                        <li><a href="#why-us" class="text-slate-400 hover:text-white transition">Näme üçin biz?</a></li>
+                        <li><a href="#team" class="text-slate-400 hover:text-white transition">Toparymyz</a></li>
+                        <li><a href="#tips" class="text-slate-400 hover:text-white transition">Maslahatlar</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Habarlaşmak</h3>
+                    <ul class="space-y-2">
+                        <li class="text-slate-400">info@kriptobilengazan.com</li>
+                        <li class="text-slate-400">+993 12 345678</li>
+                        <li class="flex space-x-4 mt-4">
+                            <a href="#" class="text-slate-400 hover:text-white transition"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="text-slate-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="text-slate-400 hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Habarnama</h3>
+                    <p class="text-slate-400 text-sm mb-4">
+                        Täze habarlary we okuw materiallary almak üçin email salgyňyzy ýazyň.
+                    </p>
+                    <div class="flex">
+                        <input type="email" placeholder="Email salgyňyz" class="px-4 py-2 rounded-l-lg w-full text-slate-900 focus:outline-none">
+                        <button class="bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2 rounded-r-lg hover:opacity-90 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 mt-12 pt-8 text-center text-slate-500 text-sm">
+                <p>© 2023 Kripto Bilen Gazan. Ähli hukuklary goralan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Language switcher (simplified for demo)
+        function changeLanguage(lang) {
+            alert('Language changed to: ' + lang);
+            // In a real implementation, you would load translations here
+        }
+
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in, .slide-up');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        fadeElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=D1yorDev/kriptobilengazann" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
+</html>
